@@ -40,14 +40,16 @@ class Tarefa {
 class ConfigApi {
   Database? db;
 
-  inicializa_db() async{
+  Future open() async{
     final p = await getDatabasesPath();
     String path = join(p, "bancotarefas.db");
 
     db = await openDatabase(path, version: 1, onCreate: (Database db, int version) async{
       await db.execute("""CREATE TABLE $tarefaTable(
-        $columnId integer primary key autoincrement,
-        
+        $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+        $columnTitulo TEXT NOT NULL,
+        $columnDesc STRING NOT NULL,
+        $columnDataTarefa DATE NOT NULL
       )""");
     });
   }
