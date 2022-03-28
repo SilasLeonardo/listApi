@@ -75,6 +75,7 @@ class _HomePageState extends State<HomePage> {
 
   Container getContainer(int index) {
     return Container(
+
       margin: const EdgeInsets.all(15.0),
       decoration: BoxDecoration(
         color: Colors.white,
