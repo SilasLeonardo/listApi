@@ -46,9 +46,7 @@ class Tarefa {
 class ConfigApi {
   static final ConfigApi _instance = ConfigApi.internal();
 
-<<<<<<< HEAD
   Future open() async{
-=======
   factory ConfigApi() => _instance;
 
   ConfigApi.internal();
@@ -65,22 +63,18 @@ class ConfigApi {
   }
 
   Future<Database> inicializaDB() async {
->>>>>>> 7d0012182372c0eb2539fda081a0eceff87d9710
     final p = await getDatabasesPath();
     String path = join(p, "bancotarefas.db");
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute("""CREATE TABLE $tarefaTable(
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-<<<<<<< HEAD
         $columnTitulo TEXT NOT NULL,
         $columnDesc STRING NOT NULL,
         $columnDataTarefa DATE NOT NULL
-=======
         $columnTitulo TEXT,
         $columnDesc TEXT,
         $columnDataTarefa TEXT
->>>>>>> 7d0012182372c0eb2539fda081a0eceff87d9710
       )""");
     });
   }
