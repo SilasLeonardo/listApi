@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taredas_api/model/config_db.dart';
+import 'package:taredas_api/views/home_page.dart';
 import 'package:taredas_api/views/util/appBar.dart';
 import 'package:intl/intl.dart';
 
@@ -16,6 +17,7 @@ class _TaferaNewState extends State<TaferaNew> {
 
   final _tituloController = TextEditingController();
   final _descController = TextEditingController();
+  
 
   @override
   void initState() {
@@ -41,40 +43,18 @@ class _TaferaNewState extends State<TaferaNew> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            TextFormField(
-              controller: _tituloController,
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                icon: Icon(Icons.title),
-                labelText: "Titulo",
-              ),
-              validator: (String? value) {
-                return value != null
-                    ? "Campo obrigatório, preencher antes de salvar"
-                    : null;
-              },
-            ),
-            TextFormField(
-              controller: _descController,
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                icon: Icon(Icons.description),
-                labelText: "Descrição",
-              ),
-              validator: (String? value) {
-                return value != null
-                    ? "Campo obrigatório, preencher antes de salvar"
-                    : null;
-              },
-            ),
+            
+          textoTitulo("Novo titulo"),
+          textoTitulo("descTitulo")
+
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xff1CB273),
         onPressed: () {
-          if (_tituloController.text != null && _descController.text != null) {
-            tarefa.titulo = _tituloController.text;
+          if (textTituloController.text != null && _descController.text != null) {
+            tarefa.titulo = textTituloController.text;
             tarefa.desc = _descController.text;
             final dataDeCriacaoDaTarefa = DateTime.now();
             tarefa.dataTarefa =

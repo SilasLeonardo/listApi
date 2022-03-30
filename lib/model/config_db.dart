@@ -45,7 +45,6 @@ class Tarefa {
 class ConfigApi {
   static final ConfigApi _instance = ConfigApi.internal();
 
-  Future open() async{
   factory ConfigApi() => _instance;
 
   ConfigApi.internal();
@@ -68,9 +67,6 @@ class ConfigApi {
         onCreate: (Database db, int version) async {
       await db.execute("""CREATE TABLE $tarefaTable(
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-        $columnTitulo TEXT NOT NULL,
-        $columnDesc STRING NOT NULL,
-        $columnDataTarefa DATE NOT NULL
         $columnTitulo TEXT,
         $columnDesc TEXT,
         $columnDataTarefa TEXT
