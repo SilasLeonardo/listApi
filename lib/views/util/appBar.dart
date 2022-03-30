@@ -5,6 +5,9 @@ import 'package:taredas_api/views/routes/alertDailogEdit.dart';
 import 'package:taredas_api/views/routes/tarefa_new.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+final textTituloController = TextEditingController();
+
+
 AppBar appBar(String titulo) {
   return AppBar(
     title: Text(
@@ -22,6 +25,16 @@ AppBar appBar(String titulo) {
   );
 }
 
+TextField textoTitulo(String descTitulo) {
+  return TextFormField(
+    controller: textTituloController,
+    keyboardType: TextInputType.text,
+    decoration: InputDecoration(
+      icon: const Icon(Icons.title),
+      labelText: descTitulo,
+    ),
+  );
+}
 Container body(List<Tarefa> tarefas, Function atualizaTela, ConfigApi api) {
   return Container(
     width: double.infinity,
