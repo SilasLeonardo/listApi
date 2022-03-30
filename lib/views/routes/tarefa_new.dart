@@ -19,6 +19,9 @@ class _TaferaNewState extends State<TaferaNew> {
   final _descController = TextEditingController();
   
 
+  final _focusTitulo = FocusScopeNode();
+  final _focusDesc = FocusScopeNode();
+
   @override
   void initState() {
     super.initState();
@@ -43,10 +46,35 @@ class _TaferaNewState extends State<TaferaNew> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            
-          textoTitulo("Novo titulo"),
-          textoTitulo("descTitulo")
 
+            TextFormField(
+              controller: _tituloController,
+              focusNode: _focusTitulo,
+              keyboardType: TextInputType.text,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.title),
+                labelText: "Titulo",
+              ),
+              validator: (String? value) {
+                return value != null
+                    ? "Campo obrigatório, preencher antes de salvar"
+                    : null;
+              },
+            ),
+            TextFormField(
+              controller: _descController,
+              focusNode: _focusDesc,
+              keyboardType: TextInputType.text,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.description),
+                labelText: "Descrição",
+              ),
+              validator: (String? value) {
+                return value != null
+                    ? "Campo obrigatório, preencher antes de salvar"
+                    : null;
+              },
+            ),
           ],
         ),
       ),
