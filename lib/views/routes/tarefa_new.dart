@@ -56,6 +56,7 @@ class _TaferaNewState extends State<TaferaNew> {
           if (textTituloController.text != null && _descController.text != null) {
             tarefa.titulo = textTituloController.text;
             tarefa.desc = _descController.text;
+            tarefa.isDone = false;
             final dataDeCriacaoDaTarefa = DateTime.now();
             tarefa.dataTarefa =
                 DateFormat("dd/MM/yyyy").format(dataDeCriacaoDaTarefa);
