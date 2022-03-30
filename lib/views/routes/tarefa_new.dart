@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:taredas_api/model/config_db.dart';
-import 'package:taredas_api/views/home_page.dart';
 import 'package:taredas_api/views/util/appBar.dart';
 import 'package:intl/intl.dart';
 
@@ -17,7 +16,6 @@ class _TaferaNewState extends State<TaferaNew> {
 
   final _tituloController = TextEditingController();
   final _descController = TextEditingController();
-  
 
   final _focusTitulo = FocusScopeNode();
   final _focusDesc = FocusScopeNode();
@@ -26,6 +24,16 @@ class _TaferaNewState extends State<TaferaNew> {
   void initState() {
     super.initState();
     tarefa = Tarefa();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tituloController.dispose();
+    _descController.dispose();
+
+    _focusTitulo.dispose();
+    _focusDesc.dispose();
   }
 
   @override
@@ -46,7 +54,6 @@ class _TaferaNewState extends State<TaferaNew> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
             TextFormField(
               controller: _tituloController,
               focusNode: _focusTitulo,
@@ -55,11 +62,6 @@ class _TaferaNewState extends State<TaferaNew> {
                 icon: Icon(Icons.title),
                 labelText: "Titulo",
               ),
-              validator: (String? value) {
-                return value != null
-                    ? "Campo obrigatório, preencher antes de salvar"
-                    : null;
-              },
             ),
             TextFormField(
               controller: _descController,
@@ -69,11 +71,6 @@ class _TaferaNewState extends State<TaferaNew> {
                 icon: Icon(Icons.description),
                 labelText: "Descrição",
               ),
-              validator: (String? value) {
-                return value != null
-                    ? "Campo obrigatório, preencher antes de salvar"
-                    : null;
-              },
             ),
           ],
         ),
@@ -81,11 +78,18 @@ class _TaferaNewState extends State<TaferaNew> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xff1CB273),
         onPressed: () {
-          if (textTituloController.text != null && _descController.text != null) {
-            tarefa.titulo = textTituloController.text;
+          if (_tituloController.text.isEmpty || _descController.text.isEmpty) {
+            if (_tituloController.text.isEmpty) {
+              FocusScope.of(context).requestFocus(_focusTitulo);
+            } else {
+              FocusScope.of(context).requestFocus(_focusDesc);
+            }
+          } else {
+            tarefa.titulo = _tituloController.text;
             tarefa.desc = _descController.text;
             tarefa.isDone = false;
             final dataDeCriacaoDaTarefa = DateTime.now();
+           
             tarefa.dataTarefa =
                 DateFormat("dd/MM/yyyy").format(dataDeCriacaoDaTarefa);
             Navigator.pop(context, tarefa);
